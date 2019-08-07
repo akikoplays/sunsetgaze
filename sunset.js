@@ -5,7 +5,7 @@
  * @author Boris Posavec
  *
  * Created at     : 2019-07-29 10:02:57 
- * Last modified  : 2019-08-07 22:11:52
+ * Last modified  : 2019-08-07 22:20:21
  */
 
 
@@ -21,6 +21,7 @@ var startTime;
 
 window.addEventListener('resize', onWindowResize, false);
 
+
 /**
  * Resize callback.
  */
@@ -30,6 +31,7 @@ function onWindowResize()
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
 
 /**
  * 
@@ -137,6 +139,7 @@ function animatePointCloud()
     cloud.mesh.geometry.attributes.scale.needsUpdate = true;
 }
 
+
 /**
  * Initialize renderer and scene.
  * Load shaders from file, when shaders ready: load uniforms, create plane, create blanket div (white cover).
@@ -197,15 +200,15 @@ function init()
           }
         sun = createPlane(uniforms, vertex, fragment);
         scene.add(sun.mesh);
-        audioReady();
+        rendererReady();
     });
 }
 
 
 /**
- * When audio is loaded (ready for playback) allow user to tap the screen and start playing.
+ * When shaders are loaded, allow user to tap the screen and start playing.
  */
-function audioReady()
+function rendererReady()
 {
     console.log('Audio ready');
     document.getElementById('loading').innerHTML = "Ready.";
@@ -222,6 +225,7 @@ function audioReady()
     }
     document.addEventListener('mousedown', onClick, false);    
 }
+
 
 /**
  * Start animating stuff. Fade in the scene, let the sun glide in etc.
@@ -245,6 +249,7 @@ function start()
     startTime = new Date();
     render();
 }
+
 
 /**
  * Main update loop. This is where we render the current frame.
