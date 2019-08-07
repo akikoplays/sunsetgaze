@@ -31,6 +31,16 @@ body {
     background: #fff;
 }
 
+#loading {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: #622;
+    font-size: 2em;
+    font-family: 'Journey', Montserrat, sans-serif;
+    opacity: 1;
+}
+
 #caption {
     position: absolute;
     width: 100%;

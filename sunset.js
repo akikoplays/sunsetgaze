@@ -5,7 +5,7 @@
  * @author Boris Posavec
  *
  * Created at     : 2019-07-29 10:02:57 
- * Last modified  : 2019-07-29 10:12:07
+ * Last modified  : 2019-08-07 21:30:01
  */
 
 
@@ -169,6 +169,21 @@ function init()
     blanket.style.backgroundColor = '#fff';
     container.appendChild(blanket);
 
+    // Start spiral (loader anim)
+    var spiral = document.createElement('div');
+    spiral.id = 'spiral';
+    spiral.style.position = 'absolute';
+    spiral.style.width = '100%';
+    spiral.style.height = '100%';
+    spiral.style.top = '0%';
+    spiral.style.left = '0%';
+    spiral.style.margin = 'auto';
+    spiral.style.backgroundColor = '#fff';
+    container.appendChild(spiral);    
+    spiral.innerHTML = `
+    <image id="pic" src="./gfx/spiral.jpg" style="position:absolute; top:0; left:0; right:0; bottom:0; width:10%; margin:auto;"> <p id="loading">Loading...</p>
+    `;
+
     loadShader('./sun.vert', './sun.frag', (vertex, fragment) => {
         var uniforms = {
             time: {value: time},
@@ -182,34 +197,17 @@ function init()
           }
         sun = createPlane(uniforms, vertex, fragment);
         scene.add(sun.mesh);
-
-        // start();
-        intro();
     });
 }
 
+
 /**
- * Show splash screen. On click -> start music playback & demo
+ * When audio is loaded (ready for playback) allow user to tap the screen and start playing.
  */
-function intro()
+function audioReady()
 {
-    var spiral = document.createElement('div');
-    spiral.id = 'spiral';
-    spiral.style.position = 'absolute';
-    spiral.style.width = '100%';
-    spiral.style.height = '100%';
-    spiral.style.top = '0%';
-    spiral.style.left = '0%';
-    spiral.style.margin = 'auto';
-    spiral.style.backgroundColor = '#fff';
-    
-    spiral.innerHTML = `
-    <image id="pic" src="./gfx/spiral.jpg" style="position:absolute; top:0; left:0; right:0; bottom:0; width:10%; margin:auto;">
-    `;
-
-    var container = document.getElementById('world');
-    container.appendChild(spiral);
-
+    console.log('Audio ready');
+    document.getElementById('loading').innerHTML = "Ready.";
     const onClick = (evt) => {
         document.removeEventListener('mousedown', onClick);
         const audio = document.getElementById('audio');
