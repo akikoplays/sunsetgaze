@@ -5,7 +5,7 @@
  * @author Boris Posavec
  *
  * Created at     : 2019-07-29 10:02:57 
- * Last modified  : 2019-08-07 21:30:01
+ * Last modified  : 2019-08-07 22:11:52
  */
 
 
@@ -197,6 +197,7 @@ function init()
           }
         sun = createPlane(uniforms, vertex, fragment);
         scene.add(sun.mesh);
+        audioReady();
     });
 }
 
